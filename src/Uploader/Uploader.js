@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './Uploader.css';
 import Dropzone from 'react-dropzone';
 
 class Uploader extends Component {
@@ -16,8 +15,8 @@ class Uploader extends Component {
 
     render () {
         return (
-            <div className="uploader">
-                <Dropzone className="dropzone" onDrop={this.onDrop} multiple={false}>
+            <div className="uploader" style={uploader}>
+                <Dropzone className="dropzone" style={dropzone} onDrop={this.onDrop} multiple={false}>
                     Upload Image
                 </Dropzone>
                 <h4>Drop files</h4>
@@ -30,3 +29,24 @@ class Uploader extends Component {
 }
 
 export default Uploader;
+
+// CSS
+const uploader = {
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginTop: '30px'
+}
+const dropzone = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '150px',
+    height: '150px',
+    border: '2px dashed #7b727c',
+    borderRadius: '6px',
+    fontSize: '14px',
+    color: '#383338',
+    background: '#ffffff7e',
+}
