@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Aux from './Aux';
 import Dropzone from 'react-dropzone';
 import upload from 'superagent';
 
@@ -6,7 +7,8 @@ class Uploader extends Component {
     constructor () {
         super();
         this.state = {
-            files: []
+            files: [],
+            image: ''
         }
     }
 
@@ -27,26 +29,30 @@ class Uploader extends Component {
                 console.log('Error', res.body);
             } else {
                 console.log('File uploaded', res.body);
+                this.setState({ image: res.body.file });
             }
         });
     }
 
     render () {
         return (
-            <form onSubmit={this.upload}>
-                <div className="uploader" style={uploader}>
-                    <Dropzone className="dropzone" style={dropzone} onDrop={this.onDrop} multiple={false}>
-                        Upload Image
-                    </Dropzone>
-                    <h4>Drop files</h4>
-                    <ul>
-                        { this.state.files.map((e, i) => <li key={i}>{e.name} - {e.size} bytes</li>) }
-                    </ul>
-                </div>
-                <div className="btn">
-                    <input type="submit" style={btn}/>
-                </div>
-            </form>
+            <Aux>
+                <form onSubmit={this.upload}>
+                    <div className="uploader" style={uploader}>
+                        <Dropzone className="dropzone" style={dropzone} onDrop={this.onDrop} multiple={false}>
+                            Upload Image
+                        </Dropzone>
+                        <h4>Drop files</h4>
+                        <ul>
+                            { this.state.files.map((e, i) => <li key={i}>{e.name} - {e.size} bytes</li>) }
+                        </ul>
+                    </div>
+                    <div className="btn">
+                        <input type="submit" style={btn}/>
+                    </div>
+                </form>
+                { this.state.image && <img src={this.state.image} alt="pic" style={{maxWidth: '80%'}}  /> }
+            </Aux>
         )
     }
 }
