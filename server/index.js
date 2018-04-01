@@ -19,16 +19,18 @@ const storage = multer.diskStorage({
     destination: './public/uploads/',
     filename: function (req, file, cb){
         const mimetype = file.mimetype.split('/').map(e => e === 'jpeg' ? 'jpg' : e);
-        cb(null, `${file.fieldname}-${Date.now()}.${mimetype}`);
+        cb(null, `${file.fieldname}-${Date.now()}.${mimetype[1]}`);
     }
 });
 
 // Init upload
-const upload = multer({ storage: storage }).single('image');
+const upload = multer({ 
+    storage: storage,
+    limits: { fileSize: 1000000 }
+}).single('image');
 
 // Endpoint
 app.post('/upload', (req, res) => {
-    // res.send('test');
     upload(req, res, (err) => {
         if (err) {
             res.status(412).send('Error');

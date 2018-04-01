@@ -22,8 +22,8 @@ class Uploader extends Component {
         upload.post('/upload')
         .attach('image', files[0])
         .end(err => {
-            if (err) console.log(err);
-            alert('File uploaded!');
+            if (err) console.log(err)
+            else alert('File uploaded');
         });
     }
 
