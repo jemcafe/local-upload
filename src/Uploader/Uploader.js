@@ -11,7 +11,6 @@ class Uploader extends Component {
     }
 
     onDrop = (files) => {
-        console.log(files);
         this.setState({ files });
     }
 
