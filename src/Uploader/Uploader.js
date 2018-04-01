@@ -11,6 +11,7 @@ class Uploader extends Component {
     }
 
     onDrop = (files) => {
+        console.log(files);
         this.setState({ files });
     }
 
@@ -20,9 +21,13 @@ class Uploader extends Component {
 
         upload.post('/upload')
         .attach('image', files[0])
-        .end(err => {
-            if (err) console.log(err)
-            else alert('File uploaded');
+        .end((err, res) => {
+            if (err) { 
+                console.log(err);
+                console.log('Error', res.body);
+            } else {
+                console.log('File uploaded', res.body);
+            }
         });
     }
 
