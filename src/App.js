@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 // Components
 import Uploader from './Uploader/Uploader';
 
