@@ -17,19 +17,26 @@ app.use(bodyParser.json());
 // Storage
 const storage = multer.diskStorage({
     destination: './public/uploads/',
-    filename: (req, file, cb) => {
-        cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
+    filename: function (req, file, cb){
+        const mimetype = file.mimetype.split('/').map(e => e === 'jpeg' ? 'jpg' : e);
+        cb(null, `${file.fieldname}-${Date.now()}.${mimetype}`);
     }
 });
 
 // Init upload
-const upload = multer({
-    storage: storage
-}).single('image');
+const upload = multer({ storage: storage }).single('image');
 
 // Endpoint
 app.post('/upload', (req, res) => {
-    res.send('test');
+    // res.send('test');
+    upload(req, res, (err) => {
+        if (err) {
+            res.status(412).send('Error');
+        } else {
+            console.log(req.file);
+            res.send('test');
+        }
+    })
 });
 
 
