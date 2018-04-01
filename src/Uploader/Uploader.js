@@ -37,7 +37,7 @@ class Uploader extends Component {
     render () {
         return (
             <Aux>
-                <form onSubmit={this.upload}>
+                <form onSubmit={this.upload} style={form}>
                     <div className="uploader" style={uploader}>
                         <Dropzone className="dropzone" style={dropzone} onDrop={this.onDrop} multiple={false}>
                             Upload Image
@@ -60,12 +60,14 @@ class Uploader extends Component {
 export default Uploader;
 
 // CSS
+const form = {
+    margin: '30px 0'
+}
 const uploader = {
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
-    alignItems: 'center',
-    marginTop: '30px'
+    alignItems: 'center'
 }
 const dropzone = {
     display: 'flex',
