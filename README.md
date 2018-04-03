@@ -1,6 +1,6 @@
 ## Local upload
 
-This is just a simple uploader that stores files locally.
+This is a simple react app where image files can be uploaded and stored locally.
 
 ### Uses
 
